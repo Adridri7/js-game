@@ -1,5 +1,5 @@
-class MovementSystem {
-    update(entities) {
+export default class MovementSystem {
+    update(entities, deltaTime) {
         entities.forEach(entity => {
             const position = entity.getComponent('position');
             const velocity = entity.getComponent('velocity');

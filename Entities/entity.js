@@ -1,4 +1,4 @@
-class Entity {
+export default class Entity {
     constructor(params) {
         this.components = {};
     }

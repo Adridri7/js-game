@@ -1,4 +1,4 @@
-class VelocityComponent {
+export default class VelocityComponent {
     constructor(vx, vy) {
         this.vx = vx;
         this.vy = vy;
