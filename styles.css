@@ -1,0 +1,16 @@
+body{
+    background: #222;
+}
+
+.game-container {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    outline: 1px solid #636363;
+
+    margin: auto;
+    margin-top: 15%;
+
+    overflow: hidden;
+    image-rendering: pixelated;
+}
