@@ -5,39 +5,38 @@ import InputComponent from "./Components/input.js";
 
 import MovementSystem from "./Systems/movements.js";
 import RenderSystem from "./Systems/render.js";
+import CollisionSystem from "./Systems/collision.js";
 
 import Entity from "./Entities/entity.js";
 
-const game_container = document.getElementById("game-container")
+const game_container = document.getElementById("game-container");
 
-let player = new Entity();
+let player = new Entity(1);
 player.addComponent("position", new PositionComponent(0, 0));
 player.addComponent("velocity", new VelocityComponent(5, 5));
-player.addComponent("input", new InputComponent())
+player.addComponent("input", new InputComponent());
 player.addComponent("visual", new VisualComponent('red', 32, 32));
 
+// Créer les systèmes
 let movementSys = new MovementSystem();
 let renderSys = new RenderSystem(game_container);
-
-
-
+let collisionSys = new CollisionSystem(game_container); 
 
 let lastTime = 0;  // Temps de la dernière frame
 
 function gameLoop(timestamp) {
     // Calcul du deltaTime en secondes
-    const deltaTime = ((timestamp - lastTime) / 1000 );  // Convertir en secondes
-    lastTime = timestamp;  // Mise à jour du temps de la dernière frame
+    const deltaTime = ((timestamp - lastTime) / 1000);  
+    lastTime = timestamp; 
 
-    // Mettre à jour les systèmes avec deltaTime
-    movementSys.update([player], deltaTime);  // Passer deltaTime à MovementSystem
-    renderSys.update([player]);  // Le rendu peut ne pas en avoir besoin pour le deltaTime, mais tu pourrais l'utiliser pour des animations
+    // Mettre à jour les systèmes
+    movementSys.update([player], deltaTime);  
+    collisionSys.update([player]);  
+    renderSys.update([player]); 
 
-    // Appeler la boucle de jeu à la prochaine frame
+    // Boucle du jeu
     requestAnimationFrame(gameLoop);
 }
 
 // Démarrer la boucle de jeu
 requestAnimationFrame(gameLoop);
-
-

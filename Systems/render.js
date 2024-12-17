@@ -28,5 +28,7 @@ export default class RenderSystem {
                 entityElement.style.backgroundColor = visual.color;
             }
         });
+        
+        
     }
 }

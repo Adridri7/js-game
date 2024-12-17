@@ -1,5 +1,6 @@
 export default class Entity {
-    constructor(params) {
+    constructor(id) {
+        this.id = id;
         this.components = {};
     }
     addComponent(name, component) {

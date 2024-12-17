@@ -1,6 +1,6 @@
 export default class VisualComponent {
-    constructor(color = 'yellow', width = 16, height = 16) {
-        this.color = color; 
+    constructor(color, width = 16, height = 16) {
+        this.color = color || 'yellow'; 
         this.width = width;  
         this.height = height;
     }
