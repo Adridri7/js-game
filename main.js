@@ -11,8 +11,8 @@ import CameraSystem from "./Systems/camera.js"; // Import du système de caméra
 import Entity from "./Entities/entity.js";
 
 // Variables initiales de la taille de la caméra
-let viewportWidth = 200; // Largeur de la caméra
-let viewportHeight = 300; // Hauteur de la caméra
+let viewportWidth = 300; // Largeur de la caméra
+let viewportHeight = 240; // Hauteur de la caméra
 
 const gameContainer = document.getElementById("game-container");
 
@@ -28,15 +28,15 @@ player2.addComponent("position", new PositionComponent(100, 100));
 player2.addComponent("visual", new VisualComponent("yellow", 16, 16));
 
 let player3 = new Entity(3);
-player3.addComponent("position", new PositionComponent(116, 100));
-player3.addComponent("velocity", new VelocityComponent(5, 5));
+player3.addComponent("position", new PositionComponent(1116, 100));
 player3.addComponent("visual", new VisualComponent("blue", 16, 16));
 
 // Création des systèmes
 let movementSys = new MovementSystem();
 let renderSys = new RenderSystem(gameContainer);
-let collisionSys = new CollisionSystem(gameContainer);
-let cameraSys = new CameraSystem(gameContainer, player, viewportWidth, viewportHeight); // Initialisation de la caméra avec la taille du viewport
+let cameraSys = new CameraSystem(gameContainer, player, viewportWidth, viewportHeight);
+let collisionSys = new CollisionSystem(gameContainer, cameraSys);
+
 
 let lastTime = performance.now(); // Temps de la dernière frame
 
@@ -46,10 +46,12 @@ function gameLoop(timestamp) {
     lastTime = timestamp;
 
     // Mettre à jour les systèmes
-    movementSys.update([player, player3], deltaTime);
-    collisionSys.update([player, player2, player3]);
-    renderSys.update([player, player3, player2]);
+    movementSys.update([player], deltaTime);
     cameraSys.update(); // Mise à jour de la caméra
+    collisionSys.update([player, player2, player3]);
+    renderSys.update([player, player2, player3]);
+
+
 
     // Boucle du jeu
     requestAnimationFrame(gameLoop);

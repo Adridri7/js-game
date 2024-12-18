@@ -6,7 +6,7 @@ export default class MovementSystem {
             const input = entity.getComponent('input');
 
             if (position && velocity && input) {
-                                input.update();
+                input.update();
                 position.x += velocity.vx * input.x;
                 position.y += velocity.vy * input.y;
             }

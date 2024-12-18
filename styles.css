@@ -16,8 +16,8 @@ body {
 .game-container {
     background: #888888;
     position: absolute; /* Permet de déplacer la carte à l'intérieur de la vue */
-    width: 3000px; /* Largeur totale de la carte */
-    height: 300px; /* Hauteur totale de la carte */
+    width: 3374px; /* Largeur totale de la carte */
+    height: 240px; /* Hauteur totale de la carte */
     outline: 1px solid #838383;
     image-rendering: pixelated;
     transition: transform 0.1s ease; /* Déplacement fluide de la carte */
