@@ -1,17 +1,24 @@
-body{
+body {
     background: #222;
+    margin: 0;
+    overflow: hidden; /* Empêche le défilement manuel */
+}
+
+.viewport {
+    margin: auto;
+    margin-top: 10%; /* Ajuste la position verticale de la vue */
+    border: 2px solid #838383; /* Bordure pour visualiser le viewport */
+    overflow: hidden; /* Cache les parties en dehors de la caméra */
+    position: relative; /* Nécessaire pour le contenu interne */
+    background: #333; /* Couleur de fond pour l'extérieur de la carte */
 }
 
 .game-container {
     background: #888888;
-    position: relative;
-    width: 300px;
-    height: 300px;
-    outline: 1px solid #636363;
-
-    margin: auto;
-    margin-top: 15%;
-
-    /*overflow: hidden;*/
+    position: absolute; /* Permet de déplacer la carte à l'intérieur de la vue */
+    width: 3000px; /* Largeur totale de la carte */
+    height: 300px; /* Hauteur totale de la carte */
+    outline: 1px solid #838383;
     image-rendering: pixelated;
+    transition: transform 0.1s ease; /* Déplacement fluide de la carte */
 }

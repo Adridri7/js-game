@@ -5,7 +5,7 @@ export default class InputComponent {
         this.keys = new Set();  // Ensemble des touches pressées
 
         window.addEventListener("keydown", (e) => {
-            this.keys.add(e.key);
+            this.keys.add(e.key); 
         });
 
         window.addEventListener("keyup", (e) => {
@@ -20,8 +20,8 @@ export default class InputComponent {
 
         // Mise à jour en fonction des touches pressées
         if (this.keys.has("q")) this.x = -1;
-        if (this.keys.has("d")) this.x = 1;
-        if (this.keys.has("z")) this.y = -1;
-        if (this.keys.has("s")) this.y = 1;
+        else if (this.keys.has("d")) this.x = 1;
+        else if (this.keys.has("z")) this.y = -1;
+        else if (this.keys.has("s")) this.y = 1;
     }
 }

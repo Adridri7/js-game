@@ -25,10 +25,13 @@ export default class RenderSystem {
                 entityElement.style.top = `${position.y}px`;
                 entityElement.style.width = `${visual.width}px`;
                 entityElement.style.height = `${visual.height}px`;
-                entityElement.style.backgroundColor = visual.color;
+                if (entity.isColliding == true) {
+                    entityElement.style.backgroundColor = 'lightblue'
+                } else{
+                    entityElement.style.backgroundColor = visual.color;
+                }
+                
             }
         });
-        
-        
     }
 }

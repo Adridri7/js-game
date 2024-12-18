@@ -6,33 +6,50 @@ import InputComponent from "./Components/input.js";
 import MovementSystem from "./Systems/movements.js";
 import RenderSystem from "./Systems/render.js";
 import CollisionSystem from "./Systems/collision.js";
+import CameraSystem from "./Systems/camera.js"; // Import du système de caméra
 
 import Entity from "./Entities/entity.js";
 
-const game_container = document.getElementById("game-container");
+// Variables initiales de la taille de la caméra
+let viewportWidth = 200; // Largeur de la caméra
+let viewportHeight = 300; // Hauteur de la caméra
 
+const gameContainer = document.getElementById("game-container");
+
+// Création des entités
 let player = new Entity(1);
 player.addComponent("position", new PositionComponent(0, 0));
 player.addComponent("velocity", new VelocityComponent(5, 5));
 player.addComponent("input", new InputComponent());
-player.addComponent("visual", new VisualComponent('red', 32, 32));
+player.addComponent("visual", new VisualComponent("red", 16, 16));
 
-// Créer les systèmes
+let player2 = new Entity(2);
+player2.addComponent("position", new PositionComponent(100, 100));
+player2.addComponent("visual", new VisualComponent("yellow", 16, 16));
+
+let player3 = new Entity(3);
+player3.addComponent("position", new PositionComponent(116, 100));
+player3.addComponent("velocity", new VelocityComponent(5, 5));
+player3.addComponent("visual", new VisualComponent("blue", 16, 16));
+
+// Création des systèmes
 let movementSys = new MovementSystem();
-let renderSys = new RenderSystem(game_container);
-let collisionSys = new CollisionSystem(game_container); 
+let renderSys = new RenderSystem(gameContainer);
+let collisionSys = new CollisionSystem(gameContainer);
+let cameraSys = new CameraSystem(gameContainer, player, viewportWidth, viewportHeight); // Initialisation de la caméra avec la taille du viewport
 
-let lastTime = 0;  // Temps de la dernière frame
+let lastTime = performance.now(); // Temps de la dernière frame
 
 function gameLoop(timestamp) {
     // Calcul du deltaTime en secondes
-    const deltaTime = ((timestamp - lastTime) / 1000);  
-    lastTime = timestamp; 
+    const deltaTime = (timestamp - lastTime) / 1000;
+    lastTime = timestamp;
 
     // Mettre à jour les systèmes
-    movementSys.update([player], deltaTime);  
-    collisionSys.update([player]);  
-    renderSys.update([player]); 
+    movementSys.update([player, player3], deltaTime);
+    collisionSys.update([player, player2, player3]);
+    renderSys.update([player, player3, player2]);
+    cameraSys.update(); // Mise à jour de la caméra
 
     // Boucle du jeu
     requestAnimationFrame(gameLoop);
